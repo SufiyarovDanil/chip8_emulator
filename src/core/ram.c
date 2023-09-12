@@ -1,4 +1,5 @@
 #include "ram.h"
+#include "rom.h"
 #include <stdlib.h>
 #include <memory.h>
 
@@ -58,7 +59,7 @@ void ram_kill(RAM* const self) {
 }
 
 
-byte ram_read(RAM* const self, const word addr) {
+byte ram_read(const RAM* const self, const word addr) {
 	if (!self || addr >= RAM_SIZE) {
 		return 0;
 	}
@@ -73,4 +74,14 @@ void ram_write(RAM* const self, const word addr, const byte value) {
 	}
 
 	self->space[addr] = value;
+}
+
+void ram_load_rom(RAM* const self, const ROM* const rom) {
+	if (!self || !rom) {
+		return;
+	}
+
+	if (rom_get_size(rom) > ) {
+		return;
+	}
 }

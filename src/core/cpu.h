@@ -2,6 +2,11 @@
 #define CPU_H
 #include "defs.h"
 
+#define CPU_DATA_REGISTERS_COUNT 0x10
+#define CPU_STACK_SIZE 0xC
+#define CPU_ENTRY_POINT 0x200
+
+
 typedef struct CPU CPU;
 
 /* CPU constructor */
