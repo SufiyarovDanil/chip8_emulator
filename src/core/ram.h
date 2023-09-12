@@ -3,4 +3,7 @@
 
 typedef struct RAM RAM;
 
+/* RAM constructor */
+RAM* ram_new();
+
 #endif
