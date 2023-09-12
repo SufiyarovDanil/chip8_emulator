@@ -1,5 +1,6 @@
 #ifndef ROM_H
 #define ROM_H
+#include "defs.h"
 
 typedef struct ROM ROM;
 
@@ -8,5 +9,9 @@ ROM* rom_new(char* const file_path);
 
 /* ROM destructor */
 void rom_kill(ROM* const self);
+
+size_t rom_get_size(const ROM* const self);
+
+byte* rom_get_data(const ROM* const self);
 
 #endif // ROM_H
