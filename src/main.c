@@ -1,21 +1,27 @@
 ﻿#include <stdio.h>
+#include "core/cpu.h"
+#include "core/ram.h"
 #include "core/rom.h"
 
 
 int main() {
-	int num = 1;
+	while (1) { // memory leak checking
+		CPU* cpu = cpu_new();
+		RAM* ram = ram_new();
 
-	while (num == 1) {
-		printf("enter 0 for over, 1 for continue: ");
-		scanf_s("%d", &num);
+		{
+			ROM* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
 
-		ROM* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
-		printf("%zu\n", rom_get_size(rom));
-		rom_kill(rom);
+			ram_load_rom(ram, rom);
+			rom_kill(rom);
+		}
 
-		rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/Chip8 Picture.ch8");
-		printf("%zu\n", rom_get_size(rom));
-		rom_kill(rom);
+		for (int i = 0; i < 100; i++) {
+			cpu_exec_instruction(cpu, ram);
+		}
+
+		ram_kill(ram);
+		cpu_kill(cpu);
 	}
 
 	return 0;

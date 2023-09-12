@@ -4,6 +4,8 @@
 
 typedef struct RAM RAM;
 
+typedef struct ROM ROM;
+
 /* RAM constructor */
 RAM* ram_new();
 
@@ -14,6 +16,7 @@ byte ram_read(const RAM* const self, const word addr);
 
 void ram_write(RAM* const self, const word addr, const byte value);
 
-void ram_load_rom(RAM* const self, const struct ROM* const rom);
+/* copies data from ROM to RAM */
+void ram_load_rom(RAM* const self, const ROM* const rom);
 
 #endif

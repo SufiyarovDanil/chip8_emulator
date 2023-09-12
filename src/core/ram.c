@@ -1,5 +1,7 @@
 #include "ram.h"
 #include "rom.h"
+#include "cpu.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
 
@@ -45,6 +47,7 @@ RAM* ram_new() {
 	RAM* ram = (RAM*)malloc(sizeof(RAM));
 
 	memset(ram->space, 0, RAM_SIZE);
+	_ram_load_font(ram);
 
 	return ram;
 }
@@ -76,12 +79,17 @@ void ram_write(RAM* const self, const word addr, const byte value) {
 	self->space[addr] = value;
 }
 
+
 void ram_load_rom(RAM* const self, const ROM* const rom) {
 	if (!self || !rom) {
 		return;
 	}
 
-	if (rom_get_size(rom) > ) {
+	if (rom_get_size(rom) > RAM_SIZE - CPU_ENTRY_POINT) {
+		printf("ROM size is bigger than RAM\n");
+
 		return;
 	}
+
+	memcpy(self->space + CPU_ENTRY_POINT, rom_get_data(rom), rom_get_size(rom));
 }

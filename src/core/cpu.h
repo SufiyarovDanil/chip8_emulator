@@ -9,12 +9,14 @@
 
 typedef struct CPU CPU;
 
+typedef struct RAM RAM;
+
 /* CPU constructor */
 CPU* cpu_new();
 
 /* CPU destructor */
 void cpu_kill(CPU* const self);
 
-void cpu_exec_instruction(CPU* const self, const word opcode);
+void cpu_exec_instruction(CPU* const self, RAM* const ram);
 
 #endif // CPU_H

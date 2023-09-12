@@ -1,5 +1,5 @@
 #include "cpu.h"
-#include "defs.h"
+#include "ram.h"
 #include "instruction.h"
 #include <stdlib.h>
 #include <memory.h>
@@ -36,10 +36,19 @@ void cpu_kill(CPU* const self) {
 }
 
 
-void cpu_exec_instruction(CPU* const self, const word opcode) {
+void cpu_exec_instruction(CPU* const self, RAM* const ram) {
 	if (!self) {
 		return;
 	}
 
+	const byte left_byte  = ram_read(ram, self->pc);
+	const byte right_byte = ram_read(ram, self->pc + 1);
+
+	Instruction* instruction = instruction_new(left_byte, right_byte);
+
+	self->pc += 2;
+
 	// TODO
+
+	instruction_kill(instruction);
 }
