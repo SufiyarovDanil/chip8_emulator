@@ -1,15 +1,22 @@
 ﻿#include <stdio.h>
-#include "core/cpu.h"
+#include "core/rom.h"
 
 
 int main() {
-	CPU* cpu = cpu_new();
-	
-	printf("%d\n", cpu_get_i(cpu));
-	cpu_set_i(cpu, 20);
-	printf("%d\n", cpu_get_i(cpu));
+	int num = 1;
 
-	cpu_kill(cpu);
+	while (num == 1) {
+		int num;
+
+		printf("enter 0 for over, 1 for continue: ");
+		scanf_s("%d", &num);
+
+		ROM* rom = rom_new("ergsegrser");
+		
+		rom_get_size(rom);
+
+		rom_kill(rom);
+	}
 	
 	return 0;
 }
