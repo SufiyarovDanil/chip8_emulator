@@ -6,7 +6,7 @@
 
 
 struct RAM {
-	unsigned char space[RAM_SIZE];
+	byte space[RAM_SIZE];
 };
 
 
@@ -16,4 +16,31 @@ RAM* ram_new() {
 	memset(ram->space, 0, RAM_SIZE);
 
 	return ram;
+}
+
+
+void ram_kill(RAM* const self) {
+	if (!self) {
+		return;
+	}
+
+	free(self);
+}
+
+
+byte ram_read(RAM* const self, const word addr) {
+	if (!self || addr >= RAM_SIZE) {
+		return 0;
+	}
+
+	return self->space[addr];
+}
+
+
+void ram_write(RAM* const self, const word addr, const byte value) {
+	if (!self || addr >= RAM_SIZE) {
+		return;
+	}
+
+	self->space[addr] = value;
 }
