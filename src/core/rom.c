@@ -11,12 +11,12 @@ struct ROM {
 
 
 /* returns nullptr if file is not founded */
-byte* _get_data_rom_file(char* const file_path, size_t* file_size) {
+byte* _get_data_rom_file(const char* const file_path, size_t* file_size) {
 	FILE* file = (FILE*)0;
 	errno_t error = fopen_s(&file, file_path, "rb");
 
 	if (error) {
-		printf("failed to open file: %s", file_path);
+		printf("failed to open file: %s\n", file_path);
 
 		return (byte*)0;
 	}
@@ -33,7 +33,7 @@ byte* _get_data_rom_file(char* const file_path, size_t* file_size) {
 }
 
 
-ROM* rom_new(char* const file_path) {
+ROM* rom_new(const char* const file_path) {
 	size_t data_size = 0;
 	byte* const data = _get_data_rom_file(file_path, &data_size);
 

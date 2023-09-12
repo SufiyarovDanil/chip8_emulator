@@ -5,7 +5,7 @@
 typedef struct ROM ROM;
 
 /* ROM constructor. If file path is incorrect, rom will destroy itself and returns nullptr */
-ROM* rom_new(char* const file_path);
+ROM* rom_new(const char* const file_path);
 
 /* ROM destructor */
 void rom_kill(ROM* const self);
