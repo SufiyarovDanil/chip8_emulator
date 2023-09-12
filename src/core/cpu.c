@@ -40,24 +40,6 @@ void cpu_kill(CPU* const self) {
 }
 
 
-//void cpu_set_i(CPU* const self, const byte i) {
-//	if (!self) {
-//		return;
-//	}
-//
-//	self->i = i;
-//}
-//
-//
-//byte cpu_get_i(CPU* const self) {
-//	if (!self) {
-//		return 0;
-//	}
-//
-//	return self->i;
-//}
-
-
 void cpu_exec_instruction(CPU* const self, const word opcode) {
 	if (!self) {
 		return;
