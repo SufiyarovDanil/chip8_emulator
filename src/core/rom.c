@@ -16,8 +16,6 @@ byte* _get_data_rom_file(const char* const file_path, size_t* file_size) {
 	errno_t error = fopen_s(&file, file_path, "rb");
 
 	if (error) {
-		printf("failed to open file: %s\n", file_path);
-
 		return (byte*)0;
 	}
 
@@ -38,6 +36,8 @@ ROM* rom_new(const char* const file_path) {
 	byte* const data = _get_data_rom_file(file_path, &data_size);
 
 	if (!data) {
+		printf("failed t oopen file\n");
+
 		return (ROM*)0;
 	}
 

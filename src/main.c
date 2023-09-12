@@ -9,11 +9,14 @@ int main() {
 		printf("enter 0 for over, 1 for continue: ");
 		scanf_s("%d", &num);
 
-		for (int i = 0; i < 200; i++) {
-			ROM* rom = rom_new("well");
-			rom_kill(rom);
-		}
+		ROM* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
+		printf("%zu\n", rom_get_size(rom));
+		rom_kill(rom);
+
+		rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/Chip8 Picture.ch8");
+		printf("%zu\n", rom_get_size(rom));
+		rom_kill(rom);
 	}
-	
+
 	return 0;
 }
