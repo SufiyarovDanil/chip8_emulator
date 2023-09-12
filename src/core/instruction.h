@@ -1,7 +1,6 @@
 #ifndef INSTRUCTION_H
 #define INSTRUCTION_H
-
-typedef unsigned char byte;
+#include "defs.h"
 
 typedef struct Instruction Instruction;
 
