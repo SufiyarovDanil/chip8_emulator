@@ -36,3 +36,62 @@ void instruction_kill(Instruction* const self) {
 
 	free(self);
 }
+
+
+word instruction_get_opcode(const Instruction* const self) {
+	if (!self) {
+		return 0;
+	}
+
+	return self->opcode;
+}
+
+
+word instruction_get_nnn(const Instruction* const self)
+{
+	if (!self) {
+		return 0;
+	}
+
+	return self->nnn;
+}
+
+
+byte instruction_get_nn(const Instruction* const self)
+{
+	if (!self) {
+		return 0;
+	}
+
+	return self->nn;
+}
+
+
+byte instruction_get_n(const Instruction* const self)
+{
+	if (!self) {
+		return 0;
+	}
+
+	return self->n;
+}
+
+
+byte instruction_get_x(const Instruction* const self)
+{
+	if (!self) {
+		return 0;
+	}
+
+	return self->x;
+}
+
+
+byte instruction_get_y(const Instruction* const self)
+{
+	if (!self) {
+		return 0;
+	}
+
+	return self->y;
+}
