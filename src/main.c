@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+﻿//#include <stdio.h>
 #include "core/cpu.h"
 #include "core/ram.h"
 #include "core/rom.h"

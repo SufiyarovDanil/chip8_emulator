@@ -1,5 +1,6 @@
 #ifndef RAM_H
 #define RAM_H
+
 #include "defs.h"
 
 typedef struct RAM RAM;

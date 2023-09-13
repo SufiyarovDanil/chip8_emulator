@@ -1,6 +1,5 @@
 #ifndef CPU_H
 #define CPU_H
-#include "defs.h"
 
 #define CPU_DATA_REGISTERS_COUNT 0x10
 #define CPU_STACK_SIZE 0xC
