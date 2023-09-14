@@ -194,6 +194,50 @@ void _cpu_0x8(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	const byte x = instruction_get_x(instruction);
+	const byte y = instruction_get_y(instruction);
+
+	switch (instruction_get_n(instruction)) {
+	case 0x0:
+		self->v[x] = self->v[y];
+		break;
+	case 0x1:
+		self->v[x] |= self->v[y];
+		self->v[0xF] = 0;
+		break;
+	case 0x2:
+		self->v[x] &= self->v[y];
+		self->v[0xF] = 0;
+		break;
+	case 0x3:
+		self->v[x] &= self->v[y];
+		self->v[0xF] = 0;
+		break;
+	case 0x4:
+		self->v[0xF] = (word)(self->v[x] + self->v[y]) > 255;
+		self->v[x] += self->v[y];
+		break;
+	case 0x5:
+		self->v[0xF] = self->v[y] <= self->v[x];
+		self->v[x] -= self->v[y];
+		break;
+	case 0x6:
+		self->v[0xF] = self->v[x] & 0x1;
+		self->v[x] >>= 1;
+		break;
+	case 0x7:
+		self->v[0xF] = self->v[x] <= self->v[y];
+		self->v[x] = self->v[y] - self->v[x];
+		break;
+	case 0xE:
+		self->v[0xF] = (self->v[x] & 0x80) >> 7;
+		self->v[x] <<= 1;
+		break;
+	default:
+		/* wrong opcode */
+		break;
+	}
 }
 
 
@@ -223,6 +267,7 @@ void _cpu_0xC(CPU* const self, const Instruction* const instruction) {
 		return;
 	}
 }
+
 
 void _cpu_0xD(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
