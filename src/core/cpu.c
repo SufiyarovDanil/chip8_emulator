@@ -23,7 +23,7 @@ void _cpu_0xE(CPU* const self, const Instruction* const instruction);
 void _cpu_0xF(CPU* const self, const Instruction* const instruction);
 
 
-void (*instruction_set[])(CPU* const, const Instruction* const) = {
+void (* const instruction_set[])(CPU* const, const Instruction* const) = {
 	_cpu_0x0, _cpu_0x1, _cpu_0x2, _cpu_0x3,
 	_cpu_0x4, _cpu_0x5, _cpu_0x6, _cpu_0x7,
 	_cpu_0x8, _cpu_0x9, _cpu_0xA, _cpu_0xB,
@@ -80,6 +80,10 @@ void cpu_exec_instruction(CPU* const self, RAM* const ram) {
 
 
 void _cpu_0x0(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
+
 	const word nnn = instruction_get_nnn(instruction);
 
 	switch (nnn)
@@ -97,74 +101,145 @@ void _cpu_0x0(CPU* const self, const Instruction* const instruction) {
 
 
 void _cpu_0x1(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	self->pc = instruction_get_nnn(instruction);
 }
 
 
 void _cpu_0x2(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	self->stack[self->stack_ptr] = self->pc;
+	self->stack_ptr++;
+	self->pc = instruction_get_nnn(instruction);
 }
 
 
 void _cpu_0x3(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	const word nn = instruction_get_nn(instruction);
+	const byte x  = instruction_get_x(instruction);
+
+	if (self->v[x] == nn) {
+		self->pc += 2;
+	}
 }
 
 
 void _cpu_0x4(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	const word nn = instruction_get_nn(instruction);
+	const byte x = instruction_get_x(instruction);
+
+	if (self->v[x] != nn) {
+		self->pc += 2;
+	}
 }
 
 
 void _cpu_0x5(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	if (instruction_get_n(instruction) != 0) {
+		return;
+	}
+
+	const byte x = instruction_get_x(instruction);
+	const byte y = instruction_get_y(instruction);
+
+	if (self->v[x] == self->v[y]) {
+		self->pc += 2;
+	}
 }
 
 
 void _cpu_0x6(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	const word nn = instruction_get_nn(instruction);
+	const byte x  = instruction_get_x(instruction);
+	
+	self->v[x] = nn;
 }
 
 
 void _cpu_0x7(CPU* const self, const Instruction* const instruction) {
+	if (!self || !instruction) {
+		return;
+	}
 
+	const word nn = instruction_get_nn(instruction);
+	const byte x = instruction_get_x(instruction);
+
+	self->v[x] += nn;
 }
 
 
 void _cpu_0x8(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 
 void _cpu_0x9(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 
 void _cpu_0xA(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 
 void _cpu_0xB(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 
 void _cpu_0xC(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 void _cpu_0xD(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 
 void _cpu_0xE(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
 
 
 void _cpu_0xF(CPU* const self, const Instruction* const instruction) {
-
+	if (!self || !instruction) {
+		return;
+	}
 }
