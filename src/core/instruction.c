@@ -47,8 +47,7 @@ word instruction_get_opcode(const Instruction* const self) {
 }
 
 
-word instruction_get_nnn(const Instruction* const self)
-{
+word instruction_get_nnn(const Instruction* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -57,8 +56,7 @@ word instruction_get_nnn(const Instruction* const self)
 }
 
 
-byte instruction_get_nn(const Instruction* const self)
-{
+byte instruction_get_nn(const Instruction* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -67,8 +65,7 @@ byte instruction_get_nn(const Instruction* const self)
 }
 
 
-byte instruction_get_n(const Instruction* const self)
-{
+byte instruction_get_n(const Instruction* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -77,8 +74,7 @@ byte instruction_get_n(const Instruction* const self)
 }
 
 
-byte instruction_get_x(const Instruction* const self)
-{
+byte instruction_get_x(const Instruction* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -87,8 +83,7 @@ byte instruction_get_x(const Instruction* const self)
 }
 
 
-byte instruction_get_y(const Instruction* const self)
-{
+byte instruction_get_y(const Instruction* const self) {
 	if (!self) {
 		return 0;
 	}
