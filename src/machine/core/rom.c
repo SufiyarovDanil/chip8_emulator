@@ -36,7 +36,7 @@ rom_t* rom_new(const char* const file_path) {
 	byte* const data = _get_data_rom_file(file_path, &data_size);
 
 	if (!data) {
-		printf("failed t oopen file\n");
+		printf("failed to open file\n");
 
 		return (rom_t*)0;
 	}

@@ -1,7 +1,7 @@
 ﻿//#include <stdio.h>
-#include "core/cpu.h"
-#include "core/ram.h"
-#include "core/rom.h"
+#include "machine/core/cpu.h"
+#include "machine/core/ram.h"
+#include "machine/core/rom.h"
 
 
 int main() {
