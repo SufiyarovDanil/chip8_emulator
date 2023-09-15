@@ -245,6 +245,13 @@ void _cpu_0x9(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	const byte x = instruction_get_x(instruction);
+	const byte y = instruction_get_y(instruction);
+
+	if (self->v[x] != self->v[y]) {
+		self->pc += 2;
+	}
 }
 
 
@@ -252,6 +259,8 @@ void _cpu_0xA(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	self->i = instruction_get_nnn(instruction);
 }
 
 
@@ -259,6 +268,8 @@ void _cpu_0xB(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	self->pc = instruction_get_nnn(instruction) + self->v[0];
 }
 
 
@@ -266,6 +277,11 @@ void _cpu_0xC(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	const byte nn = instruction_get_nn(instruction);
+	const byte x  = instruction_get_x(instruction);
+
+	self->v[x] = (byte)(rand() % 255) & nn;
 }
 
 
@@ -273,6 +289,8 @@ void _cpu_0xD(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	// TODO screen
 }
 
 
@@ -280,6 +298,8 @@ void _cpu_0xE(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	// TODO keyboard
 }
 
 
@@ -287,4 +307,6 @@ void _cpu_0xF(CPU* const self, const Instruction* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
+
+	// TODO keyboard
 }
