@@ -11,6 +11,8 @@ display_t* display_new();
 /* display destructor */
 void display_kill(display_t* const self);
 
+void display_clear(display_t* const self);
+
 byte display_read_pixel(const display_t* const self, const word addr);
 
 void display_write_pixel(display_t* const self, const word addr, const byte value);

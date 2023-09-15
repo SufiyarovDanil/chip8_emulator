@@ -29,6 +29,15 @@ void display_kill(display_t* const self) {
 }
 
 
+void display_clear(display_t* const self) {
+	if (!self) {
+		return;
+	}
+
+	memset(self->pixels, 0, DISPLAY_SIZE);
+}
+
+
 byte display_read_pixel(const display_t* const self, const word addr) {
 	if (!self || addr >= DISPLAY_SIZE) {
 		return 0;
