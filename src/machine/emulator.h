@@ -9,4 +9,6 @@ emulator_t* emulator_new();
 /* emulator destructor */
 void emulator_kill(emulator_t* const self);
 
-#endif // !EMULATOR_H
+void emulator_start(emulator_t* const self);
+
+#endif // EMULATOR_H

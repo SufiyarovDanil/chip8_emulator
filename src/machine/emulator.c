@@ -30,3 +30,8 @@ void emulator_kill(emulator_t* const self) {
 	ram_kill(self->ram);
 	free(self);
 }
+
+
+void emulator_start(emulator_t* const self) {
+
+}
