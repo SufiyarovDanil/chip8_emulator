@@ -4,7 +4,7 @@
 #include <memory.h>
 
 
-struct ROM {
+struct rom_s {
 	size_t data_size;
 	byte* data;
 };
@@ -31,17 +31,17 @@ byte* _get_data_rom_file(const char* const file_path, size_t* file_size) {
 }
 
 
-ROM* rom_new(const char* const file_path) {
+rom_t* rom_new(const char* const file_path) {
 	size_t data_size = 0;
 	byte* const data = _get_data_rom_file(file_path, &data_size);
 
 	if (!data) {
 		printf("failed t oopen file\n");
 
-		return (ROM*)0;
+		return (rom_t*)0;
 	}
 
-	ROM* const rom = (ROM*)malloc(sizeof(ROM));
+	rom_t* const rom = (rom_t*)malloc(sizeof(rom_t));
 
 	rom->data_size = data_size;
 	rom->data = data;
@@ -50,7 +50,7 @@ ROM* rom_new(const char* const file_path) {
 }
 
 
-void rom_kill(ROM* const self) {
+void rom_kill(rom_t* const self) {
 	if (!self) {
 		return;
 	}
@@ -60,7 +60,7 @@ void rom_kill(ROM* const self) {
 }
 
 
-size_t rom_get_size(const ROM* const self) {
+size_t rom_get_size(const rom_t* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -69,7 +69,7 @@ size_t rom_get_size(const ROM* const self) {
 }
 
 
-byte* rom_get_data(const ROM* const self) {
+byte* rom_get_data(const rom_t* const self) {
 	if (!self) {
 		return (byte*)0;
 	}

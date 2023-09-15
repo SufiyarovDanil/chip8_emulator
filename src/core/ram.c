@@ -29,12 +29,12 @@ const byte font_set[FONT_SIZE] = {
 };
 
 
-struct RAM {
+struct ram_s {
 	byte space[RAM_SIZE];
 };
 
 
-void _ram_load_font(RAM* const self) {
+void _ram_load_font(ram_t* const self) {
 	if (!self) {
 		return;
 	}
@@ -43,8 +43,8 @@ void _ram_load_font(RAM* const self) {
 }
 
 
-RAM* ram_new() {
-	RAM* ram = (RAM*)malloc(sizeof(RAM));
+ram_t* ram_new() {
+	ram_t* ram = (ram_t*)malloc(sizeof(ram_t));
 
 	memset(ram->space, 0, RAM_SIZE);
 	_ram_load_font(ram);
@@ -53,7 +53,7 @@ RAM* ram_new() {
 }
 
 
-void ram_kill(RAM* const self) {
+void ram_kill(ram_t* const self) {
 	if (!self) {
 		return;
 	}
@@ -62,7 +62,7 @@ void ram_kill(RAM* const self) {
 }
 
 
-byte ram_read(const RAM* const self, const word addr) {
+byte ram_read(const ram_t* const self, const word addr) {
 	if (!self || addr >= RAM_SIZE) {
 		return 0;
 	}
@@ -71,7 +71,7 @@ byte ram_read(const RAM* const self, const word addr) {
 }
 
 
-void ram_write(RAM* const self, const word addr, const byte value) {
+void ram_write(ram_t* const self, const word addr, const byte value) {
 	if (!self || addr >= RAM_SIZE) {
 		return;
 	}
@@ -80,7 +80,7 @@ void ram_write(RAM* const self, const word addr, const byte value) {
 }
 
 
-void ram_load_rom(RAM* const self, const ROM* const rom) {
+void ram_load_rom(ram_t* const self, const rom_t* const rom) {
 	if (!self || !rom) {
 		return;
 	}

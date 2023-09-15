@@ -3,24 +3,24 @@
 
 #include "defs.h"
 
-typedef struct Instruction Instruction;
+typedef struct instruction_s instruction_t;
 
 /* Instruction constructor */
-Instruction* instruction_new(const byte left_byte, const byte right_byte);
+instruction_t* instruction_new(const byte left_byte, const byte right_byte);
 
 /* Instruction destructor */
-void instruction_kill(Instruction* const self);
+void instruction_kill(instruction_t* const self);
 
-word instruction_get_opcode(const Instruction* const self);
+word instruction_get_opcode(const instruction_t* const self);
 
-word instruction_get_nnn(const Instruction* const self);
+word instruction_get_nnn(const instruction_t* const self);
 
-byte instruction_get_nn(const Instruction* const self);
+byte instruction_get_nn(const instruction_t* const self);
 
-byte instruction_get_n(const Instruction* const self);
+byte instruction_get_n(const instruction_t* const self);
 
-byte instruction_get_x(const Instruction* const self);
+byte instruction_get_x(const instruction_t* const self);
 
-byte instruction_get_y(const Instruction* const self);
+byte instruction_get_y(const instruction_t* const self);
 
 #endif // INSTRUCTION_H

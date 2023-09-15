@@ -1,5 +1,6 @@
 #include "display.h"
-#include <memory>
+#include <stdlib.h>
+#include <memory.h>
 
 #define DISPLAY_WIDTH 64
 #define DISPLAY_HEIGHT 32

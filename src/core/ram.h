@@ -1,23 +1,22 @@
 #ifndef RAM_H
 #define RAM_H
 
+#include "rom.h"
 #include "defs.h"
 
-typedef struct RAM RAM;
-
-typedef struct ROM ROM;
+typedef struct ram_s ram_t;
 
 /* RAM constructor */
-RAM* ram_new();
+ram_t* ram_new();
 
 /* RAM destructor */
-void ram_kill(RAM* const self);
+void ram_kill(ram_t* const self);
 
-byte ram_read(const RAM* const self, const word addr);
+byte ram_read(const ram_t* const self, const word addr);
 
-void ram_write(RAM* const self, const word addr, const byte value);
+void ram_write(ram_t* const self, const word addr, const byte value);
 
 /* copies data from ROM to RAM */
-void ram_load_rom(RAM* const self, const ROM* const rom);
+void ram_load_rom(ram_t* const self, const rom_t* const rom);
 
 #endif

@@ -6,11 +6,11 @@
 
 int main() {
 	while (1) { // memory leak checking
-		CPU* cpu = cpu_new();
-		RAM* ram = ram_new();
+		cpu_t* cpu = cpu_new();
+		ram_t* ram = ram_new();
 
 		{
-			ROM* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
+			rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
 
 			ram_load_rom(ram, rom);
 			rom_kill(rom);

@@ -3,7 +3,7 @@
 #include <memory.h>
 
 
-struct Instruction {
+struct instruction_s {
 	word opcode;
 	word nnn;		// 12 bit addr constant
 	byte nn;		// 8 bit constant
@@ -13,8 +13,8 @@ struct Instruction {
 };
 
 
-Instruction* instruction_new(const byte left_byte, const byte right_byte) {
-	Instruction* const instruction = (Instruction*)malloc(sizeof(Instruction));
+instruction_t* instruction_new(const byte left_byte, const byte right_byte) {
+	instruction_t* const instruction = (instruction_t*)malloc(sizeof(instruction_t));
 
 	const word opcode = ((word)left_byte << 8) | ((word)right_byte);
 
@@ -29,7 +29,7 @@ Instruction* instruction_new(const byte left_byte, const byte right_byte) {
 }
 
 
-void instruction_kill(Instruction* const self) {
+void instruction_kill(instruction_t* const self) {
 	if (!self) {
 		return;
 	}
@@ -38,7 +38,7 @@ void instruction_kill(Instruction* const self) {
 }
 
 
-word instruction_get_opcode(const Instruction* const self) {
+word instruction_get_opcode(const instruction_t* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -47,7 +47,7 @@ word instruction_get_opcode(const Instruction* const self) {
 }
 
 
-word instruction_get_nnn(const Instruction* const self) {
+word instruction_get_nnn(const instruction_t* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -56,7 +56,7 @@ word instruction_get_nnn(const Instruction* const self) {
 }
 
 
-byte instruction_get_nn(const Instruction* const self) {
+byte instruction_get_nn(const instruction_t* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -65,7 +65,7 @@ byte instruction_get_nn(const Instruction* const self) {
 }
 
 
-byte instruction_get_n(const Instruction* const self) {
+byte instruction_get_n(const instruction_t* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -74,7 +74,7 @@ byte instruction_get_n(const Instruction* const self) {
 }
 
 
-byte instruction_get_x(const Instruction* const self) {
+byte instruction_get_x(const instruction_t* const self) {
 	if (!self) {
 		return 0;
 	}
@@ -83,7 +83,7 @@ byte instruction_get_x(const Instruction* const self) {
 }
 
 
-byte instruction_get_y(const Instruction* const self) {
+byte instruction_get_y(const instruction_t* const self) {
 	if (!self) {
 		return 0;
 	}

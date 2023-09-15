@@ -5,25 +5,25 @@
 #include <memory.h>
 
 
-void _cpu_0x0(CPU* const self, const Instruction* const instruction);
-void _cpu_0x1(CPU* const self, const Instruction* const instruction);
-void _cpu_0x2(CPU* const self, const Instruction* const instruction);
-void _cpu_0x3(CPU* const self, const Instruction* const instruction);
-void _cpu_0x4(CPU* const self, const Instruction* const instruction);
-void _cpu_0x5(CPU* const self, const Instruction* const instruction);
-void _cpu_0x6(CPU* const self, const Instruction* const instruction);
-void _cpu_0x7(CPU* const self, const Instruction* const instruction);
-void _cpu_0x8(CPU* const self, const Instruction* const instruction);
-void _cpu_0x9(CPU* const self, const Instruction* const instruction);
-void _cpu_0xA(CPU* const self, const Instruction* const instruction);
-void _cpu_0xB(CPU* const self, const Instruction* const instruction);
-void _cpu_0xC(CPU* const self, const Instruction* const instruction);
-void _cpu_0xD(CPU* const self, const Instruction* const instruction);
-void _cpu_0xE(CPU* const self, const Instruction* const instruction);
-void _cpu_0xF(CPU* const self, const Instruction* const instruction);
+void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x1(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x2(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x3(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x4(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x5(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x6(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x7(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x8(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0x9(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0xA(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0xB(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0xC(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0xE(cpu_t* const self, const instruction_t* const instruction);
+void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction);
 
 
-void (* const instruction_set[])(CPU* const, const Instruction* const) = {
+void (* const instruction_set[])(cpu_t* const, const instruction_t* const) = {
 	_cpu_0x0, _cpu_0x1, _cpu_0x2, _cpu_0x3,
 	_cpu_0x4, _cpu_0x5, _cpu_0x6, _cpu_0x7,
 	_cpu_0x8, _cpu_0x9, _cpu_0xA, _cpu_0xB,
@@ -31,7 +31,7 @@ void (* const instruction_set[])(CPU* const, const Instruction* const) = {
 };
 
 
-struct CPU {
+struct cpu_s {
 	byte v[CPU_DATA_REGISTERS_COUNT];	// data registers V0-VF
 	word i;								// index register
 	word pc;							// program counter
@@ -40,8 +40,8 @@ struct CPU {
 };
 
 
-CPU* cpu_new() {
-	CPU* cpu = (CPU*)malloc(sizeof(CPU));
+cpu_t* cpu_new() {
+	cpu_t* cpu = (cpu_t*)malloc(sizeof(cpu_t));
 
 	memset(cpu->v, 0, CPU_DATA_REGISTERS_COUNT * sizeof(byte));
 	cpu->i = 0;
@@ -53,7 +53,7 @@ CPU* cpu_new() {
 }
 
 
-void cpu_kill(CPU* const self) {
+void cpu_kill(cpu_t* const self) {
 	if (!self) {
 		return;
 	}
@@ -62,14 +62,14 @@ void cpu_kill(CPU* const self) {
 }
 
 
-void cpu_exec_instruction(CPU* const self, RAM* const ram) {
+void cpu_exec_instruction(cpu_t* const self, ram_t* const ram) {
 	if (!self) {
 		return;
 	}
 
 	const byte left_byte  = ram_read(ram, self->pc);
 	const byte right_byte = ram_read(ram, self->pc + 1);
-	Instruction* instruction = instruction_new(left_byte, right_byte);
+	instruction_t* instruction = instruction_new(left_byte, right_byte);
 	const word category = (instruction_get_opcode(instruction) >> 12) & 0xF;
 
 	self->pc += 2;
@@ -79,7 +79,7 @@ void cpu_exec_instruction(CPU* const self, RAM* const ram) {
 }
 
 
-void _cpu_0x0(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -100,7 +100,7 @@ void _cpu_0x0(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x1(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x1(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -109,7 +109,7 @@ void _cpu_0x1(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x2(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x2(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -120,7 +120,7 @@ void _cpu_0x2(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x3(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x3(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -134,7 +134,7 @@ void _cpu_0x3(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x4(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x4(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -148,7 +148,7 @@ void _cpu_0x4(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x5(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x5(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -166,7 +166,7 @@ void _cpu_0x5(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x6(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x6(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -178,7 +178,7 @@ void _cpu_0x6(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x7(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x7(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -190,7 +190,7 @@ void _cpu_0x7(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x8(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x8(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -241,7 +241,7 @@ void _cpu_0x8(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0x9(CPU* const self, const Instruction* const instruction) {
+void _cpu_0x9(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -255,7 +255,7 @@ void _cpu_0x9(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0xA(CPU* const self, const Instruction* const instruction) {
+void _cpu_0xA(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -264,7 +264,7 @@ void _cpu_0xA(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0xB(CPU* const self, const Instruction* const instruction) {
+void _cpu_0xB(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -273,7 +273,7 @@ void _cpu_0xB(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0xC(CPU* const self, const Instruction* const instruction) {
+void _cpu_0xC(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -285,7 +285,7 @@ void _cpu_0xC(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0xD(CPU* const self, const Instruction* const instruction) {
+void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -294,7 +294,7 @@ void _cpu_0xD(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0xE(CPU* const self, const Instruction* const instruction) {
+void _cpu_0xE(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
@@ -303,7 +303,7 @@ void _cpu_0xE(CPU* const self, const Instruction* const instruction) {
 }
 
 
-void _cpu_0xF(CPU* const self, const Instruction* const instruction) {
+void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
