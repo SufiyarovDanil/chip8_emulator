@@ -1,6 +1,7 @@
 #ifndef CPU_H
 #define CPU_H
 
+#include "../emulator.h"
 #include "ram.h"
 
 #define CPU_DATA_REGISTERS_COUNT 0x10
@@ -11,7 +12,7 @@
 typedef struct cpu_s cpu_t;
 
 /* CPU constructor */
-cpu_t* cpu_new();
+cpu_t* cpu_new(emulator_t* const owner);
 
 /* CPU destructor */
 void cpu_kill(cpu_t* const self);

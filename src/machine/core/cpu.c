@@ -37,10 +37,11 @@ struct cpu_s {
 	word pc;							// program counter
 	word stack[CPU_STACK_SIZE];			// subroutine stack
 	byte stack_ptr;						// subroutine stack pointer
+	emulator_t* owner;
 };
 
 
-cpu_t* cpu_new() {
+cpu_t* cpu_new(emulator_t* const owner) {
 	cpu_t* cpu = (cpu_t*)malloc(sizeof(cpu_t));
 
 	memset(cpu->v, 0, CPU_DATA_REGISTERS_COUNT * sizeof(byte));
@@ -48,6 +49,7 @@ cpu_t* cpu_new() {
 	cpu->pc = CPU_ENTRY_POINT;
 	memset(cpu->stack, 0, CPU_STACK_SIZE * sizeof(word));
 	cpu->stack_ptr = 0;
+	cpu->owner = owner;
 
 	return cpu;
 }
