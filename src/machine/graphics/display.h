@@ -3,6 +3,11 @@
 
 #include "../core/defs.h"
 
+#define DISPLAY_WIDTH 64
+#define DISPLAY_HEIGHT 32
+#define DISPLAY_SIZE DISPLAY_WIDTH * DISPLAY_HEIGHT
+
+
 typedef struct display_s display_t;
 
 /* display constructor */

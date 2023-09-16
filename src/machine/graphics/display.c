@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include <memory.h>
 
-#define DISPLAY_WIDTH 64
-#define DISPLAY_HEIGHT 32
-#define DISPLAY_SIZE DISPLAY_WIDTH * DISPLAY_HEIGHT
-
 
 struct display_s {
 	byte pixels[DISPLAY_SIZE];

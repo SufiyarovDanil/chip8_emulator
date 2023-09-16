@@ -297,7 +297,9 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 		return;
 	}
 
-	// TODO screen
+	const byte x = instruction_get_x(instruction);
+	const byte y = instruction_get_y(instruction);
+	byte x_coord = self->v[x];
 }
 
 
