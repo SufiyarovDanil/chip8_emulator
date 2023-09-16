@@ -3,10 +3,10 @@
 
 
 int main() {
-	while (1) {
-		emulator_t* emulator = emulator_new();
-		emulator_kill(emulator);
-	}
+	emulator_t* emulator = emulator_new();
+
+	emulator_start(emulator);
+	emulator_kill(emulator);
 
 	return 0;
 }
