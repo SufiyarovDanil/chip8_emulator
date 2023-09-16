@@ -39,7 +39,7 @@ void emulator_start(emulator_t* const self) {
 }
 
 
-display_t* emulator_get_dispay(const emulator_t* const self) {
+display_t* emulator_get_display(const emulator_t* const self) {
 	if (!self) {
 		return (display_t*)0;
 	}

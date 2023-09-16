@@ -15,7 +15,7 @@ void emulator_kill(emulator_t* const self);
 
 void emulator_start(emulator_t* const self);
 
-display_t* emulator_get_dispay(const emulator_t* const self);
+display_t* emulator_get_display(const emulator_t* const self);
 
 ram_t* emulator_get_ram(const emulator_t* const self);
 

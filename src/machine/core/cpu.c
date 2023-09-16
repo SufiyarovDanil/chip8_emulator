@@ -90,12 +90,17 @@ void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction) {
 
 	switch (nnn)
 	{
-	case 0xE0:
-		// TODO clear display
+	case 0xE0: {
+		display_t* display = emulator_get_display(self->owner);
+
+		display_clear(display);
 		break;
-	case 0xEE:
+	}
+	case 0xEE: {
 		self->stack_ptr -= 1;
 		self->pc = self->stack[self->stack_ptr];
+		break;
+	}
 	default:
 		break;
 	}
