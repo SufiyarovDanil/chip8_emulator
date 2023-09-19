@@ -18,7 +18,7 @@ add_executable (
 	"src/machine/core/rom.c" 
 	"src/machine/graphics/display.h"
 	"src/machine/graphics/display.c"
-)
+ "src/machine/input/keypad.h" "src/machine/input/keypad.c")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)

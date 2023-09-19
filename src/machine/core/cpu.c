@@ -32,11 +32,11 @@ void (* const instruction_set[])(cpu_t* const, const instruction_t* const) = {
 
 
 struct cpu_s {
-	byte v[CPU_DATA_REGISTERS_COUNT];	// data registers V0-VF
-	word i;								// index register
-	word pc;							// program counter
-	word stack[CPU_STACK_SIZE];			// subroutine stack
-	byte stack_ptr;						// subroutine stack pointer
+	byte        v[CPU_DATA_REGISTERS_COUNT];    // data registers V0-VF
+	word        i;                              // index register
+	word        pc;                             // program counter
+	word        stack[CPU_STACK_SIZE];          // subroutine stack
+	byte        stack_ptr;                      // subroutine stack pointer
 	emulator_t* owner;
 };
 
@@ -297,9 +297,45 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 		return;
 	}
 
+	const byte n = instruction_get_n(instruction);
 	const byte x = instruction_get_x(instruction);
 	const byte y = instruction_get_y(instruction);
-	byte x_coord = self->v[x];
+	byte x_coord = self->v[x] % DISPLAY_WIDTH;
+	byte y_coord = self->v[y] % DISPLAY_HEIGHT;
+	const byte origin_x_coord = x_coord;
+
+	self->v[0xF] = 0;
+
+	display_t* display = emulator_get_display(self->owner);
+	ram_t* ram         = emulator_get_ram(self->owner);
+
+	for (byte i = 0; i < n; i++) {
+		const byte sprite_data = ram_read(ram, self->i + i);
+		x_coord = origin_x_coord;
+
+		for (byte j = 8; i > 0; j--) {
+			const word pixel_coord = y_coord * DISPLAY_WIDTH + x_coord;
+			byte pixel = display_read_pixel(display, pixel_coord);
+			const byte sprite_bit = sprite_data & (1 << j);
+
+			if (pixel && sprite_bit) {
+				self->v[0xF] = 1;
+			}
+
+			pixel ^= sprite_bit;
+
+			display_write_pixel(display, pixel_coord, pixel);
+
+			if (++x_coord > DISPLAY_WIDTH) {
+				break;
+			}
+		}
+
+		if (++y_coord > DISPLAY_WIDTH) {
+			break;
+		}
+
+	}
 }
 
 
