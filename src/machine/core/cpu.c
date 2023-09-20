@@ -65,15 +65,16 @@ void cpu_kill(cpu_t* const self) {
 }
 
 
-void cpu_exec_instruction(cpu_t* const self, ram_t* const ram) {
+void cpu_exec_instruction(cpu_t* const self) {
 	if (!self) {
 		return;
 	}
 
-	const byte left_byte  = ram_read(ram, self->pc);
-	const byte right_byte = ram_read(ram, self->pc + 1);
+	const ram_t* const ram     = emulator_get_ram(self->owner);
+	const byte left_byte       = ram_read(ram, self->pc);
+	const byte right_byte      = ram_read(ram, self->pc + 1);
 	instruction_t* instruction = instruction_new(left_byte, right_byte);
-	const word category = (instruction_get_opcode(instruction) >> 12) & 0xF;
+	const word category        = (instruction_get_opcode(instruction) >> 12) & 0xF;
 
 	self->pc += 2;
 

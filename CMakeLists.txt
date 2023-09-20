@@ -24,7 +24,7 @@ add_executable (
 	"src/machine/graphics/display.c"
 	"src/machine/input/keypad.h"
 	"src/machine/input/keypad.c"
-)
+ "src/window/window.h" "src/window/window.c" "src/app.c" "src/app.h")
 
 target_link_libraries(${PROJECT_NAME} glfw)
 

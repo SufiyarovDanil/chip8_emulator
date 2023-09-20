@@ -1,7 +1,6 @@
 #include "keypad.h"
 #include <stdlib.h>
 #include <memory.h>
-#include <GLFW/glfw3.h>
 
 #define KEY_COUNT 0x10
 

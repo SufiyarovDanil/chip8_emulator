@@ -1,12 +1,11 @@
-﻿//#include <stdio.h>
-#include "machine/emulator.h"
+﻿#include "app.h"
 
 
 int main() {
-	emulator_t* emulator = emulator_new();
+	app_t* app = app_new();
 
-	emulator_start(emulator);
-	emulator_kill(emulator);
+	app_run(app);
+	app_kill(app);
 
 	return 0;
 }

@@ -44,14 +44,19 @@ void emulator_start(emulator_t* const self) {
 	}
 
 	rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
-	const size_t rom_size = rom_get_size(rom);
 
 	ram_load_rom(self->ram, rom);
 	rom_kill(rom);
+}
 
-	for (word i = 0x200; i < 0x200 + rom_size; i++) {
-		printf("0x%02x ", ram_read(self->ram, i));
+
+void emulator_make_step(emulator_t* const self, GLFWwindow* const window) {
+	if (!self) {
+		return;
 	}
+
+	cpu_exec_instruction(self->cpu);
+	keypad_poll_keys(self->keypad, window);
 }
 
 
