@@ -2,6 +2,10 @@
 
 project ("chip8_emulator")
 
+set(GLFW_DIR "dependencies/glfw-3.3.8")
+
+add_subdirectory(${GLFW_DIR})
+
 add_executable (
 	${PROJECT_NAME}
 	"src/main.c"
@@ -18,7 +22,11 @@ add_executable (
 	"src/machine/core/rom.c" 
 	"src/machine/graphics/display.h"
 	"src/machine/graphics/display.c"
- "src/machine/input/keypad.h" "src/machine/input/keypad.c")
+	"src/machine/input/keypad.h"
+	"src/machine/input/keypad.c"
+)
+
+target_link_libraries(${PROJECT_NAME} glfw)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)

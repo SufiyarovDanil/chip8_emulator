@@ -344,7 +344,7 @@ void _cpu_0xE(cpu_t* const self, const instruction_t* const instruction) {
 		return;
 	}
 
-	// TODO keyboard
+	
 }
 
 
