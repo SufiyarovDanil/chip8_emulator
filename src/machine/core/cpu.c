@@ -345,8 +345,27 @@ void _cpu_0xE(cpu_t* const self, const instruction_t* const instruction) {
 		return;
 	}
 
-	const emulator_t* const emulator = self->owner;
-	const keypad_t* const keypad = emulator->keypad;
+	const keypad_t* const keypad = emulator_get_keypad(self->owner);
+	const byte x = instruction_get_x(instruction);
+	const byte nn = instruction_get_nn(instruction);
+
+	switch (nn)
+	{
+	case 0x9E: {
+		if (keypad_key_at(keypad, self->v[x])) {
+			self->pc += 2;
+		}
+		break;
+	}
+	case 0xA1: {
+		if (!keypad_key_at(keypad, self->v[x])) {
+			self->pc += 2;
+		}
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 
@@ -355,5 +374,57 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 		return;
 	}
 
-	// TODO keyboard
+	const byte nn = instruction_get_nn(instruction);
+	const byte x = instruction_get_x(instruction);
+	ram_t* ram = emulator_get_ram(self->owner);
+
+	switch (nn)
+	{
+	case 0xA: {
+		const keypad_t* const keypad = emulator_get_keypad(self->owner);
+
+		if (keypad_any_key_pressed(keypad)) {
+			self->pc -= 2;
+		}
+
+		break;
+	}
+	case 0x1E: {
+		self->i += self->v[x];
+	}
+	case 0x7: {
+		// TODO sound
+	}
+	case 0x15: {
+		// TODO sound
+	}
+	case 0x18: {
+		// TODO sound
+	}
+	case 0x29: {
+		self->i = self->v[x] * 5;
+	}
+	case 0x33: {
+		byte bcd = self->v[x];
+
+		ram_write(ram, self->i + 2, bcd % 10);
+		bcd /= 10;
+		ram_write(ram, self->i + 1, bcd % 10);
+		bcd /= 10;
+		ram_write(ram, self->i, bcd);
+	}
+	case 0x55: {
+		for (int i = 0; i <= x; i++) {
+			ram_write(ram, self->i + i, self->v[i]);
+		}
+	}
+	case 0x65: {
+		for (int i = 0; i <= x; i++) {
+			ram_write(ram, self->i + i, self->v[i]);
+			self->v[i] = ram_read(ram, self->i + i);
+		}
+	}
+	default:
+		break;
+	}
 }

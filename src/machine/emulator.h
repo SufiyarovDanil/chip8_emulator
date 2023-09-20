@@ -3,6 +3,7 @@
 
 #include "core/ram.h"
 #include "graphics/display.h"
+#include "input/keypad.h"
 
 
 typedef struct emulator_s emulator_t;
@@ -18,5 +19,7 @@ void emulator_start(emulator_t* const self);
 display_t* emulator_get_display(const emulator_t* const self);
 
 ram_t* emulator_get_ram(const emulator_t* const self);
+
+keypad_t* emulator_get_keypad(const emulator_t* const self);
 
 #endif // EMULATOR_H

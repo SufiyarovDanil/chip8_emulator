@@ -1,5 +1,4 @@
 #include "keypad.h"
-#include "../core/defs.h"
 #include <stdlib.h>
 #include <memory.h>
 #include <GLFW/glfw3.h>
@@ -35,6 +34,31 @@ void keypad_kill(keypad_t* const self) {
 	}
 
 	free(self);
+}
+
+
+byte keypad_key_at(const keypad_t* const self, word key_index) {
+	if (!self || key_index >= KEY_COUNT) {
+		return 0;
+	}
+
+	return self->keys[key_index];
+}
+
+
+byte keypad_any_key_pressed(const keypad_t* const self)
+{
+	if (!self) {
+		return 0;
+	}
+
+	for (int i = 0; i < KEY_COUNT; i++) {
+		if (self->keys[i]) {
+			return 1;
+		}
+	}
+
+	return 0;
 }
 
 

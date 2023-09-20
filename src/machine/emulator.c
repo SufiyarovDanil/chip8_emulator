@@ -1,6 +1,5 @@
 #include "emulator.h"
 #include "core/cpu.h"
-#include "input/keypad.h"
 #include "stdlib.h"
 #include <memory.h>
 
@@ -58,4 +57,13 @@ ram_t* emulator_get_ram(const emulator_t* const self) {
 	}
 
 	return self->ram;
+}
+
+
+keypad_t* emulator_get_keypad(const emulator_t* const self) {
+	if (!self) {
+		return (keypad_t*)0;
+	}
+
+	return self->keypad;
 }
