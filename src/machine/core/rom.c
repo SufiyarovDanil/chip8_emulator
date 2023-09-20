@@ -19,11 +19,12 @@ byte* _get_data_rom_file(const char* const file_path, size_t* file_size) {
 		return (byte*)0;
 	}
 
-	fseek(file, 0L, SEEK_END);
+	fseek(file, 0, SEEK_END);
 
 	*file_size = ftell(file);
 	byte* data = (byte*)malloc(*file_size * sizeof(byte));
 
+	rewind(file);
 	fread(data, *file_size, 1, file);
 	fclose(file);
 

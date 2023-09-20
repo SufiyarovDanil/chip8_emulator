@@ -1,5 +1,6 @@
 #include "emulator.h"
 #include "core/cpu.h"
+#include <stdio.h>
 #include "stdlib.h"
 #include <memory.h>
 
@@ -38,7 +39,19 @@ void emulator_kill(emulator_t* const self) {
 
 
 void emulator_start(emulator_t* const self) {
+	if (!self) {
+		return;
+	}
 
+	rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
+	const size_t rom_size = rom_get_size(rom);
+
+	ram_load_rom(self->ram, rom);
+	rom_kill(rom);
+
+	for (word i = 0x200; i < 0x200 + rom_size; i++) {
+		printf("0x%02x ", ram_read(self->ram, i));
+	}
 }
 
 
