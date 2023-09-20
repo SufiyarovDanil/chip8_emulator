@@ -24,7 +24,7 @@ void _cpu_0xE(cpu_t* const self, const instruction_t* const instruction);
 void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction);
 
 
-void (* const instruction_set[])(cpu_t* const, const instruction_t* const) = {
+void (* const instruction_set[16])(cpu_t* const, const instruction_t* const) = {
 	_cpu_0x0, _cpu_0x1, _cpu_0x2, _cpu_0x3,
 	_cpu_0x4, _cpu_0x5, _cpu_0x6, _cpu_0x7,
 	_cpu_0x8, _cpu_0x9, _cpu_0xA, _cpu_0xB,
