@@ -1,5 +1,6 @@
 #include "emulator.h"
 #include "core/cpu.h"
+#include "input/keypad.h"
 #include "stdlib.h"
 #include <memory.h>
 
@@ -8,6 +9,7 @@ struct emulator_s {
 	display_t* display;
 	cpu_t*     cpu;
 	ram_t*     ram;
+	keypad_t*  keypad;
 };
 
 
@@ -17,6 +19,7 @@ emulator_t* emulator_new() {
 	emulator->display = display_new();
 	emulator->cpu     = cpu_new(emulator);
 	emulator->ram     = ram_new();
+	emulator->keypad  = keypad_new();
 
 	return emulator;
 }
@@ -30,6 +33,7 @@ void emulator_kill(emulator_t* const self) {
 	display_kill(self->display);
 	cpu_kill(self->cpu);
 	ram_kill(self->ram);
+	keypad_kill(self->keypad);
 	free(self);
 }
 

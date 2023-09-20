@@ -1,5 +1,6 @@
 #include "cpu.h"
 #include "ram.h"
+#include "../input/keypad.h"
 #include "instruction.h"
 #include <stdlib.h>
 #include <memory.h>
@@ -344,7 +345,8 @@ void _cpu_0xE(cpu_t* const self, const instruction_t* const instruction) {
 		return;
 	}
 
-	
+	const emulator_t* const emulator = self->owner;
+	const keypad_t* const keypad = emulator->keypad;
 }
 
 
