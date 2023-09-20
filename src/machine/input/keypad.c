@@ -39,7 +39,7 @@ void keypad_kill(keypad_t* const self) {
 
 
 void keypad_poll_keys(keypad_t* const self, GLFWwindow* const window) {
-	if (!self) {
+	if (!self || !window) {
 		return;
 	}
 
