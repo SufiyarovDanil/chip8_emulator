@@ -1,9 +1,9 @@
 #include "app.h"
 #include "machine/emulator.h"
 #include "window/window.h"
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 
 typedef enum app_state {
@@ -25,6 +25,8 @@ app_t* app_new() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	gladLoadGL();
 
 	app_t* app = (app_t*)malloc(sizeof(app_t));
 
@@ -59,7 +61,7 @@ void app_run(app_t* const self) {
 
 	while (self->state == RUNNING && !glfwWindowShouldClose(glfw_win)) {
 		emulator_make_step(self->emulator, glfw_win);
-		//window_redraw(self->window);
+		window_redraw(self->window);
 
 		const int state = glfwGetKey(glfw_win, GLFW_KEY_ESCAPE);
 

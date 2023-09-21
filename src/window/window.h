@@ -11,6 +11,8 @@ window_t* window_new(const char* const title, int width, int height);
 /* window destructor */
 void window_kill(window_t* const self);
 
+void window_redraw(window_t* const self);
+
 /* retrns GLFWwindow pointer */
 GLFWwindow* window_get_raw(window_t* const self);
 

@@ -2,10 +2,10 @@
 #define KEYPAD_H
 
 #include "../core/defs.h"
-#include <GLFW/glfw3.h>
-
 
 typedef struct keypad_s keypad_t;
+
+typedef struct GLFWwindow GLFWwindow;
 
 /* keypad constructor */
 keypad_t* keypad_new();

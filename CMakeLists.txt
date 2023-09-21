@@ -3,11 +3,14 @@
 project ("chip8_emulator")
 
 set(GLFW_DIR "dependencies/glfw-3.3.8")
+set(GLAD_DIR "dependencies/glad")
 
 add_subdirectory(${GLFW_DIR})
+include_directories("${GLAD_DIR}/include")
 
 add_executable (
 	${PROJECT_NAME}
+	"${GLAD_DIR}/src/glad.c"
 	"src/main.c"
 	"src/machine/emulator.c"
 	"src/machine/emulator.h"
@@ -24,7 +27,10 @@ add_executable (
 	"src/machine/graphics/display.c"
 	"src/machine/input/keypad.h"
 	"src/machine/input/keypad.c"
- "src/window/window.h" "src/window/window.c" "src/app.c" "src/app.h")
+	"src/window/window.h"
+	"src/window/window.c"
+	"src/app.c"
+	"src/app.h")
 
 target_link_libraries(${PROJECT_NAME} glfw)
 
