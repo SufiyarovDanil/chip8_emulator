@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
-project ("chip8_emulator")
+project("chip8_emulator")
 
 set(GLFW_DIR "dependencies/glfw-3.3.8")
 set(GLAD_DIR "dependencies/glad")
