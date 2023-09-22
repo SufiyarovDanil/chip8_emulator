@@ -14,6 +14,8 @@ window_t* window_new(const char* const title, int width, int height) {
 	window_t* window = (window_t*)malloc(sizeof(window_t));
 
 	window->gl_window = glfwCreateWindow(width, height, title, 0, 0);
+	
+	glfwMakeContextCurrent(window->gl_window);
 
 	return window;
 }
@@ -34,6 +36,7 @@ void window_redraw(window_t* const self) {
 		return;
 	}
 
+	glClearColor(0.f, 0.4f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// ...

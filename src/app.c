@@ -26,13 +26,17 @@ app_t* app_new() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	gladLoadGL();
-
 	app_t* app = (app_t*)malloc(sizeof(app_t));
 
 	app->emulator = emulator_new();
 	app->window   = window_new("CHIP8", 800, 400);
 	app->state    = RUNNING;
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		app_kill(app);
+
+		return (app_t*)0;
+	}
 
 	return app;
 }
@@ -69,7 +73,6 @@ void app_run(app_t* const self) {
 			self->state = CLOSED;
 		}
 
-		glfwSwapBuffers(glfw_win);
 		glfwPollEvents();
 	}
 }
