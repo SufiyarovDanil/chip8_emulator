@@ -43,7 +43,7 @@ void emulator_start(emulator_t* const self) {
 		return;
 	}
 
-	rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
+	rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/games/Tetris [Fran Dachille, 1991].ch8");
 
 	ram_load_rom(self->ram, rom);
 	rom_kill(rom);

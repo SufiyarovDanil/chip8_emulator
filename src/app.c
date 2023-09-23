@@ -64,7 +64,7 @@ void app_run(app_t* const self) {
 		const int state = glfwGetKey(glfw_win, GLFW_KEY_ESCAPE);
 
 		if (state == GLFW_PRESS) {
-			//self->state = CLOSED;
+			self->state = CLOSED;
 		}
 
 		glfwPollEvents();

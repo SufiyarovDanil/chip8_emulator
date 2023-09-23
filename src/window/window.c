@@ -46,6 +46,8 @@ window_t* window_new(const char* const title, int width, int height) {
 		return (window_t*)0;
 	}
 
+	glViewport(0, 0, width, height);
+
 	window->shader_program = glCreateProgram();
 	
 	GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
@@ -99,7 +101,7 @@ void window_redraw(window_t* const self, const display_t* const display) {
 
 	size_t vert_index = 0;
 
-	for (size_t i = 0; i < display_size; i++) {
+	for (word i = 0; i < display_size; i++) {
 		if (!display_read_pixel(display, i)) {
 			continue;
 		}
@@ -107,20 +109,20 @@ void window_redraw(window_t* const self, const display_t* const display) {
 		const GLfloat x = quad_side_x * (i % DISPLAY_WIDTH);
 		const GLfloat y = quad_side_y * (i / DISPLAY_WIDTH);
 		const GLfloat x_norm = 1.f / self->width;
-		const GLfloat y_norm = 1.f / self->width;
+		const GLfloat y_norm = 1.f / self->height;
 
-		verticies[vert_index + 0]  = x * x_norm - 1.f;                 // vert 1: X
-		verticies[vert_index + 1]  = y * y_norm - 1.f;                 // vert 1: Y    1---------------2/6
-		verticies[vert_index + 2]  = (x + quad_side_x) * x_norm - 1.f; // vert 2: X    |               |
-		verticies[vert_index + 3]  = y * y_norm - 1.f;                 // vert 2: Y    |               |
-		verticies[vert_index + 4]  = x * x_norm - 1.f;                 // vert 3: X    |               |
-		verticies[vert_index + 5]  = (y - quad_side_y) * y_norm - 1.f; // vert 3: Y    |               |
-		verticies[vert_index + 6]  = x * x_norm - 1.f;                 // vert 4: X    |               |
-		verticies[vert_index + 7]  = (y - quad_side_y) * y_norm - 1.f; // vert 4: Y    |               |
-		verticies[vert_index + 8]  = (x + quad_side_x) * x_norm - 1.f; // vert 5: X    |               |
-		verticies[vert_index + 9]  = (y - quad_side_y) * y_norm - 1.f; // vert 5: Y    |               |
-		verticies[vert_index + 10] = (x + quad_side_x) * x_norm - 1.f; // vert 5: X    3/4-------------5
-		verticies[vert_index + 11] = y * y_norm - 1.f;                 // vert 5: Y
+		verticies[vert_index + 0]  = x * x_norm;                       // vert 1: X
+		verticies[vert_index + 1]  = 1.f - y * y_norm;                 // vert 1: Y    1---------------2/6
+		verticies[vert_index + 2]  = (x + quad_side_x) * x_norm;       // vert 2: X    |               |
+		verticies[vert_index + 3]  = 1.f - y * y_norm;                 // vert 2: Y    |               |
+		verticies[vert_index + 4]  = x * x_norm;                       // vert 3: X    |               |
+		verticies[vert_index + 5]  = 1.f - (y - quad_side_y) * y_norm; // vert 3: Y    |               |
+		verticies[vert_index + 6]  = x * x_norm;                       // vert 4: X    |               |
+		verticies[vert_index + 7]  = 1.f - (y - quad_side_y) * y_norm; // vert 4: Y    |               |
+		verticies[vert_index + 8]  = (x + quad_side_x) * x_norm;       // vert 5: X    |               |
+		verticies[vert_index + 9]  = 1.f - (y - quad_side_y) * y_norm; // vert 5: Y    |               |
+		verticies[vert_index + 10] = (x + quad_side_x) * x_norm;       // vert 5: X    3/4-------------5
+		verticies[vert_index + 11] = 1.f - y * y_norm;                 // vert 5: Y
 		vert_index += quad_size;
 	}
 
@@ -129,7 +131,6 @@ void window_redraw(window_t* const self, const display_t* const display) {
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * arr_size, verticies, GL_DYNAMIC_DRAW);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_DYNAMIC_DRAW);
 
 	GLuint vertex_array = 0;
 	glGenVertexArrays(1, &vertex_array);

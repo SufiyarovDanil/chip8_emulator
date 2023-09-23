@@ -220,7 +220,7 @@ void _cpu_0x8(cpu_t* const self, const instruction_t* const instruction) {
 		self->v[0xF] = 0;
 		break;
 	case 0x3:
-		self->v[x] &= self->v[y];
+		self->v[x] ^= self->v[y];
 		self->v[0xF] = 0;
 		break;
 	case 0x4:
