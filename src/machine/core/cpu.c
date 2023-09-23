@@ -388,7 +388,7 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 	case 0xA: {
 		const keypad_t* const keypad = emulator_get_keypad(self->owner);
 
-		if (keypad_any_key_pressed(keypad)) {
+		if (!keypad_any_key_pressed(keypad)) {
 			self->pc -= 2;
 		}
 
@@ -425,7 +425,6 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 	}
 	case 0x65: {
 		for (int i = 0; i <= x; i++) {
-			ram_write(ram, self->i + i, self->v[i]);
 			self->v[i] = ram_read(ram, self->i + i);
 		}
 	}
