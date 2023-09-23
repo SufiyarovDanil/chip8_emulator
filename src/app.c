@@ -32,12 +32,6 @@ app_t* app_new() {
 	app->window   = window_new("CHIP8", 800, 400);
 	app->state    = RUNNING;
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		app_kill(app);
-
-		return (app_t*)0;
-	}
-
 	return app;
 }
 
@@ -65,12 +59,12 @@ void app_run(app_t* const self) {
 
 	while (self->state == RUNNING && !glfwWindowShouldClose(glfw_win)) {
 		emulator_make_step(self->emulator, glfw_win);
-		window_redraw(self->window);
+		window_redraw(self->window, emulator_get_display(self->emulator));
 
 		const int state = glfwGetKey(glfw_win, GLFW_KEY_ESCAPE);
 
 		if (state == GLFW_PRESS) {
-			self->state = CLOSED;
+			//self->state = CLOSED;
 		}
 
 		glfwPollEvents();

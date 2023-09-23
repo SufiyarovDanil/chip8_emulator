@@ -60,3 +60,18 @@ word display_get_size(const display_t* const self) {
 
 	return DISPLAY_SIZE;
 }
+
+
+size_t display_count_set_pixels(const display_t* const self) {
+	if (!self) {
+		return 0;
+	}
+
+	word result = 0;
+
+	for (word i = 0; i < DISPLAY_SIZE; i++) {
+		result += self->pixels[i];
+	}
+
+	return result;
+}

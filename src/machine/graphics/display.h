@@ -24,4 +24,6 @@ void display_write_pixel(display_t* const self, const word addr, const byte valu
 
 word display_get_size(const display_t* const self);
 
+size_t display_count_set_pixels(const display_t* const self);
+
 #endif // DISPLAY_H
