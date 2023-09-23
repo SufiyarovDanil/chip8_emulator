@@ -224,7 +224,7 @@ void _cpu_0x8(cpu_t* const self, const instruction_t* const instruction) {
 		self->v[0xF] = 0;
 		break;
 	case 0x4:
-		self->v[0xF] = (word)(self->v[x] + self->v[y]) > 255;
+		self->v[0xF] = ((word)self->v[x] + (word)self->v[y]) > 255;
 		self->v[x] += self->v[y];
 		break;
 	case 0x5:
@@ -328,12 +328,16 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 
 			display_write_pixel(display, pixel_coord, pixel);
 
-			if (++x_coord > DISPLAY_WIDTH) {
+			x_coord++;
+
+			if (x_coord > DISPLAY_WIDTH) {
 				break;
 			}
 		}
 
-		if (++y_coord > DISPLAY_WIDTH) {
+		y_coord++;
+
+		if (y_coord > DISPLAY_HEIGHT) {
 			break;
 		}
 
