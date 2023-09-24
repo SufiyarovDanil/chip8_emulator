@@ -17,6 +17,6 @@ cpu_t* cpu_new(emulator_t* const owner);
 /* CPU destructor */
 void cpu_kill(cpu_t* const self);
 
-void cpu_exec_instruction(cpu_t* const self);
+void cpu_make_step(cpu_t* const self);
 
 #endif // CPU_H

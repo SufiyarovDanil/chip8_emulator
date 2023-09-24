@@ -94,8 +94,8 @@ void window_redraw(window_t* const self, const display_t* const display) {
 	const byte layout = 2; // x, y coords
 	const byte quad_vert_count = 6;
 	const byte quad_size = layout * quad_vert_count;
-	const GLfloat quad_side_x = (GLfloat)self->width / DISPLAY_WIDTH;
-	const GLfloat quad_side_y = (GLfloat)self->height / DISPLAY_HEIGHT;
+	const GLfloat quad_side_x = (GLfloat)self->width / DISPLAY_WIDTH * 2.f;
+	const GLfloat quad_side_y = (GLfloat)self->height / DISPLAY_HEIGHT * 2.f;
 	const size_t arr_size = white_pixel_count * quad_size;
 	GLfloat* verticies = (GLfloat*)malloc(sizeof(GLfloat) * arr_size);
 
@@ -111,18 +111,18 @@ void window_redraw(window_t* const self, const display_t* const display) {
 		const GLfloat x_norm = 1.f / self->width;
 		const GLfloat y_norm = 1.f / self->height;
 
-		verticies[vert_index + 0]  = x * x_norm;                       // vert 1: X
+		verticies[vert_index + 0]  = x * x_norm - 1.f;                 // vert 1: X
 		verticies[vert_index + 1]  = 1.f - y * y_norm;                 // vert 1: Y    1---------------2/6
-		verticies[vert_index + 2]  = (x + quad_side_x) * x_norm;       // vert 2: X    |               |
+		verticies[vert_index + 2]  = (x + quad_side_x) * x_norm - 1.f; // vert 2: X    |               |
 		verticies[vert_index + 3]  = 1.f - y * y_norm;                 // vert 2: Y    |               |
-		verticies[vert_index + 4]  = x * x_norm;                       // vert 3: X    |               |
+		verticies[vert_index + 4]  = x * x_norm - 1.f;                 // vert 3: X    |               |
 		verticies[vert_index + 5]  = 1.f - (y - quad_side_y) * y_norm; // vert 3: Y    |               |
-		verticies[vert_index + 6]  = x * x_norm;                       // vert 4: X    |               |
+		verticies[vert_index + 6]  = x * x_norm - 1.f;                 // vert 4: X    |               |
 		verticies[vert_index + 7]  = 1.f - (y - quad_side_y) * y_norm; // vert 4: Y    |               |
-		verticies[vert_index + 8]  = (x + quad_side_x) * x_norm;       // vert 5: X    |               |
+		verticies[vert_index + 8]  = (x + quad_side_x) * x_norm - 1.f; // vert 5: X    |               |
 		verticies[vert_index + 9]  = 1.f - (y - quad_side_y) * y_norm; // vert 5: Y    |               |
-		verticies[vert_index + 10] = (x + quad_side_x) * x_norm;       // vert 5: X    3/4-------------5
-		verticies[vert_index + 11] = 1.f - y * y_norm;                 // vert 5: Y
+		verticies[vert_index + 10] = (x + quad_side_x) * x_norm - 1.f; // vert 6: X    3/4-------------5
+		verticies[vert_index + 11] = 1.f - y * y_norm;                 // vert 6: Y
 		vert_index += quad_size;
 	}
 

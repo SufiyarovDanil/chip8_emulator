@@ -43,7 +43,8 @@ void emulator_start(emulator_t* const self) {
 		return;
 	}
 
-	rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/games/Tetris [Fran Dachille, 1991].ch8");
+	rom_t* rom = rom_new("D:/Projects/emus/chip8_emulator/res/chip8-roms-master/programs/IBM Logo.ch8");
+	// "D:/Projects/emus/chip8_emulator/res/chip8-roms-master/games/Tetris [Fran Dachille, 1991].ch8" D:/Projects/emus/chip8_emulator/res/test_opcode.ch8
 
 	ram_load_rom(self->ram, rom);
 	rom_kill(rom);
@@ -55,7 +56,7 @@ void emulator_make_step(emulator_t* const self, GLFWwindow* const window) {
 		return;
 	}
 
-	cpu_exec_instruction(self->cpu);
+	cpu_make_step(self->cpu);
 	keypad_poll_keys(self->keypad, window);
 }
 

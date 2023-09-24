@@ -3,7 +3,10 @@
 #include "../input/keypad.h"
 #include "instruction.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <memory.h>
+
+#define INSTRUCTIONS_PER_SECOND 500
 
 
 void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction);
@@ -38,6 +41,8 @@ struct cpu_s {
 	word        pc;                             // program counter
 	word        stack[CPU_STACK_SIZE];          // subroutine stack
 	byte        stack_ptr;                      // subroutine stack pointer
+	byte        delay_timer;                    //
+	byte        sound_timer;                    //
 	emulator_t* owner;
 };
 
@@ -50,6 +55,8 @@ cpu_t* cpu_new(emulator_t* const owner) {
 	cpu->pc = CPU_ENTRY_POINT;
 	memset(cpu->stack, 0, CPU_STACK_SIZE * sizeof(word));
 	cpu->stack_ptr = 0;
+	cpu->delay_timer = 0;
+	cpu->sound_timer = 0;
 	cpu->owner = owner;
 
 	return cpu;
@@ -65,7 +72,7 @@ void cpu_kill(cpu_t* const self) {
 }
 
 
-void cpu_exec_instruction(cpu_t* const self) {
+void _cpu_exec_instruction(cpu_t* const self) {
 	if (!self) {
 		return;
 	}
@@ -83,14 +90,37 @@ void cpu_exec_instruction(cpu_t* const self) {
 }
 
 
+void cpu_make_step(cpu_t* const self) {
+	if (!self) {
+		return;
+	}
+
+	for (int i = 0; i < INSTRUCTIONS_PER_SECOND / 60; i++) {
+		_cpu_exec_instruction(self);
+	}
+
+	if (self->delay_timer > 0) {
+		self->delay_timer -= 1;
+	}
+
+	if (self->sound_timer > 0) {
+		self->sound_timer -= 1;
+		// TODO: play sound
+	}
+	else {
+		// TODO: stop playing sound
+	}
+}
+
+
 void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
 
-	const word nnn = instruction_get_nnn(instruction);
+	const word nn = instruction_get_nn(instruction);
 
-	switch (nnn)
+	switch (nn)
 	{
 	case 0xE0: {
 		display_t* display = emulator_get_display(self->owner);
@@ -99,11 +129,12 @@ void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction) {
 		break;
 	}
 	case 0xEE: {
-		self->stack_ptr -= 1;
+		self->stack_ptr--;
 		self->pc = self->stack[self->stack_ptr];
 		break;
 	}
 	default:
+		//printf("unimplemented opcode");
 		break;
 	}
 }
@@ -315,8 +346,8 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 		const byte sprite_data = ram_read(ram, self->i + i);
 		x_coord = origin_x_coord;
 
-		for (byte j = 8; i > 0; j--) {
-			const word pixel_coord = y_coord * DISPLAY_WIDTH + x_coord;
+		for (byte j = 7; i >= 0; j--) {
+			const word pixel_coord = (word)y_coord * DISPLAY_WIDTH + x_coord;
 			byte pixel = display_read_pixel(display, pixel_coord);
 			const byte sprite_bit = sprite_data & (1 << j);
 
@@ -330,14 +361,14 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 
 			x_coord++;
 
-			if (x_coord > DISPLAY_WIDTH) {
+			if (x_coord >= DISPLAY_WIDTH) {
 				break;
 			}
 		}
 
 		y_coord++;
 
-		if (y_coord > DISPLAY_HEIGHT) {
+		if (y_coord >= DISPLAY_HEIGHT) {
 			break;
 		}
 
@@ -398,13 +429,13 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 		self->i += self->v[x];
 	}
 	case 0x7: {
-		// TODO sound
+		self->v[x] = self->delay_timer;
 	}
 	case 0x15: {
-		// TODO sound
+		self->delay_timer = self->v[x];
 	}
 	case 0x18: {
-		// TODO sound
+		self->sound_timer = self->v[x];
 	}
 	case 0x29: {
 		self->i = self->v[x] * 5;
