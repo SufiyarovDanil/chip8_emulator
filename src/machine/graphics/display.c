@@ -11,7 +11,7 @@ struct display_s {
 display_t* display_new() {
 	display_t* const display = (display_t*)malloc(sizeof(display_t));
 
-	memset(display->pixels, 0, DISPLAY_SIZE);
+	memset(display->pixels, 0, sizeof(display->pixels));
 
 	return display;
 }
@@ -31,7 +31,7 @@ void display_clear(display_t* const self) {
 		return;
 	}
 
-	memset(self->pixels, 0, DISPLAY_SIZE);
+	memset(self->pixels, 0, sizeof(self->pixels));
 }
 
 
@@ -70,7 +70,9 @@ size_t display_count_set_pixels(const display_t* const self) {
 	word result = 0;
 
 	for (word i = 0; i < DISPLAY_SIZE; i++) {
-		result += self->pixels[i];
+		if (self->pixels[i]) {
+			result++;
+		}
 	}
 
 	return result;

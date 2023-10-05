@@ -3,7 +3,6 @@
 #include "../input/keypad.h"
 #include "instruction.h"
 #include <stdlib.h>
-#include <stdio.h>
 #include <memory.h>
 
 #define INSTRUCTIONS_PER_SECOND 500
@@ -349,7 +348,7 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 		for (byte j = 7; i >= 0; j--) {
 			const word pixel_coord = (word)y_coord * DISPLAY_WIDTH + x_coord;
 			byte pixel = display_read_pixel(display, pixel_coord);
-			const byte sprite_bit = sprite_data & (1 << j);
+			const byte sprite_bit = (sprite_data & (1 << j)) != 0;
 
 			if (pixel && sprite_bit) {
 				self->v[0xF] = 1;
@@ -450,12 +449,12 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 		ram_write(ram, self->i, bcd);
 	}
 	case 0x55: {
-		for (int i = 0; i <= x; i++) {
+		for (byte i = 0; i <= x; i++) {
 			ram_write(ram, self->i + i, self->v[i]);
 		}
 	}
 	case 0x65: {
-		for (int i = 0; i <= x; i++) {
+		for (byte i = 0; i <= x; i++) {
 			self->v[i] = ram_read(ram, self->i + i);
 		}
 	}
