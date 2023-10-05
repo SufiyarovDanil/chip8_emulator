@@ -1,0 +1,8 @@
+{
+  "name": "chip8-emulator",
+  "version": "1.0",
+  "dependencies": [
+    "glfw3",
+    "glad"
+  ]
+}

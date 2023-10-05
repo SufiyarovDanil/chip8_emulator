@@ -2,15 +2,11 @@
 
 project("chip8_emulator")
 
-set(GLFW_DIR "dependencies/glfw-3.3.8")
-set(GLAD_DIR "dependencies/glad")
-
-add_subdirectory(${GLFW_DIR})
-include_directories("${GLAD_DIR}/include")
+find_package(glfw3 CONFIG REQUIRED)
+find_package(glad CONFIG REQUIRED)
 
 add_executable (
 	${PROJECT_NAME}
-	"${GLAD_DIR}/src/glad.c"
 	"src/main.c"
 	"src/machine/emulator.c"
 	"src/machine/emulator.h"
@@ -32,8 +28,4 @@ add_executable (
 	"src/app.c"
 	"src/app.h")
 
-target_link_libraries(${PROJECT_NAME} glfw)
-
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
-endif()
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw glad::glad)
