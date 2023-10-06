@@ -1,6 +1,7 @@
 #include "app.h"
 #include "machine/emulator.h"
 #include "window/window.h"
+#include <nfd.h>
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 
@@ -52,7 +53,15 @@ void app_run(app_t* const self) {
 		return;
 	}
 
-	emulator_start(self->emulator);
+	nfdchar_t* file_path = NULL;
+	nfdresult_t result = NFD_OpenDialog("ch8", NULL, &file_path);
+
+	if (result != NFD_OKAY) {
+		return;
+	}
+
+	emulator_start(self->emulator, file_path);
+	free(file_path);
 
 	GLFWwindow* glfw_win = window_get_raw(self->window);
 

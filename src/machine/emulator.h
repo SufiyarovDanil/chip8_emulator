@@ -14,7 +14,7 @@ emulator_t* emulator_new();
 /* emulator destructor */
 void emulator_kill(emulator_t* const self);
 
-void emulator_start(emulator_t* const self);
+void emulator_start(emulator_t* const self, const char* const file_path);
 
 void emulator_make_step(emulator_t* const self, GLFWwindow* const window);
 
