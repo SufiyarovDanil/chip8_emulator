@@ -4,6 +4,7 @@ project("chip8_emulator")
 
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
+find_package(unofficial-nativefiledialog CONFIG REQUIRED)
 
 add_executable (
 	${PROJECT_NAME}
@@ -28,4 +29,7 @@ add_executable (
 	"src/app.c"
 	"src/app.h")
 
-target_link_libraries(${PROJECT_NAME} PRIVATE glfw glad::glad)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+	glfw
+	glad::glad
+	unofficial::nativefiledialog::nfd)
