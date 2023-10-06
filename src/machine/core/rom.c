@@ -1,7 +1,6 @@
 #include "rom.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <memory.h>
 
 
 struct rom_s {

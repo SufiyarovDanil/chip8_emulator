@@ -1,5 +1,4 @@
 #include "ram.h"
-#include "rom.h"
 #include "cpu.h"
 #include <stdio.h>
 #include <stdlib.h>

@@ -5,11 +5,11 @@
 
 struct instruction_s {
 	word opcode;
-	word nnn;		// 12 bit addr constant
-	byte nn;		// 8 bit constant
-	byte n;			// 4 bit constant
-	byte x;			// 4 bit register identifier
-	byte y;			// 4 bit register identifier
+	word nnn;       // 12 bit addr constant
+	byte nn;        // 8 bit constant
+	byte n;         // 4 bit constant
+	byte x;         // 4 bit register identifier
+	byte y;         // 4 bit register identifier
 };
 
 

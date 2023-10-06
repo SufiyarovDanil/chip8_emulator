@@ -2,7 +2,6 @@
 #define CPU_H
 
 #include "../emulator.h"
-#include "ram.h"
 
 #define CPU_DATA_REGISTERS_COUNT 0x10
 #define CPU_STACK_SIZE 0xC

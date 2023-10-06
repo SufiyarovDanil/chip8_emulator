@@ -2,7 +2,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
-#include <memory.h>
 
 
 const GLchar* const vertex_shader_source =

@@ -1,8 +1,6 @@
 #include "emulator.h"
 #include "core/cpu.h"
-#include <stdio.h>
-#include "stdlib.h"
-#include <memory.h>
+#include <stdlib.h>
 
 
 struct emulator_s {

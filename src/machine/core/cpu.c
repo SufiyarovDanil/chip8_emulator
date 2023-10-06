@@ -1,6 +1,4 @@
 #include "cpu.h"
-#include "ram.h"
-#include "../input/keypad.h"
 #include "instruction.h"
 #include <stdlib.h>
 #include <memory.h>
