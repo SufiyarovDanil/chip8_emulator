@@ -131,7 +131,7 @@ void _cpu_0x0(cpu_t* const self, const instruction_t* const instruction) {
 		break;
 	}
 	default:
-		//printf("unimplemented opcode");
+		// unimplemented opcode
 		break;
 	}
 }
@@ -424,18 +424,23 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 	}
 	case 0x1E: {
 		self->i += self->v[x];
+		break;
 	}
 	case 0x7: {
 		self->v[x] = self->delay_timer;
+		break;
 	}
 	case 0x15: {
 		self->delay_timer = self->v[x];
+		break;
 	}
 	case 0x18: {
 		self->sound_timer = self->v[x];
+		break;
 	}
 	case 0x29: {
 		self->i = self->v[x] * 5;
+		break;
 	}
 	case 0x33: {
 		byte bcd = self->v[x];
@@ -445,16 +450,19 @@ void _cpu_0xF(cpu_t* const self, const instruction_t* const instruction) {
 		ram_write(ram, self->i + 1, bcd % 10);
 		bcd /= 10;
 		ram_write(ram, self->i, bcd);
+		break;
 	}
 	case 0x55: {
 		for (byte i = 0; i <= x; i++) {
 			ram_write(ram, self->i + i, self->v[i]);
 		}
+		break;
 	}
 	case 0x65: {
 		for (byte i = 0; i <= x; i++) {
 			self->v[i] = ram_read(ram, self->i + i);
 		}
+		break;
 	}
 	default:
 		break;
