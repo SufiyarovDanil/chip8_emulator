@@ -209,7 +209,7 @@ void _cpu_0x6(cpu_t* const self, const instruction_t* const instruction) {
 	if (!self || !instruction) {
 		return;
 	}
-
+	
 	const word nn = instruction_get_nn(instruction);
 	const byte x  = instruction_get_x(instruction);
 	
@@ -345,7 +345,7 @@ void _cpu_0xD(cpu_t* const self, const instruction_t* const instruction) {
 		const byte sprite_data = ram_read(ram, self->i + i);
 		x_coord = origin_x_coord;
 
-		for (byte j = 7; i >= 0; j--) {
+		for (char j = 7; j >= 0; j--) {
 			const word pixel_coord = (word)y_coord * DISPLAY_WIDTH + x_coord;
 			byte pixel = display_read_pixel(display, pixel_coord);
 			const byte sprite_bit = (sprite_data & (1 << j)) != 0;

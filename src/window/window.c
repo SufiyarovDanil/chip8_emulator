@@ -142,8 +142,6 @@ void window_redraw(window_t* const self, const display_t* const display) {
 
 	glDrawArrays(GL_TRIANGLES, 0, white_pixel_count * quad_vert_count);
 
-	//printf("%d", white_pixel_count * quad_vert_count);
-
 	glDeleteBuffers(1, &vertex_buffer);
 	glDeleteVertexArrays(1, &vertex_array);
 	free(verticies);

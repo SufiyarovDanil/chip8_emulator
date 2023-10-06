@@ -49,7 +49,7 @@ void display_write_pixel(display_t* const self, const word addr, const byte valu
 		return;
 	}
 
-	self->pixels[addr] = value;
+	self->pixels[addr] = value != 0;
 }
 
 
