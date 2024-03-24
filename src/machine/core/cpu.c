@@ -1,5 +1,5 @@
-#include "cpu.h"
-#include "instruction.h"
+#include "machine/core/cpu.h"
+#include "machine/core/instruction.h"
 #include <stdlib.h>
 #include <memory.h>
 

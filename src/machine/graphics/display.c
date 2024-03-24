@@ -1,4 +1,4 @@
-#include "display.h"
+#include "machine/graphics/display.h"
 #include <stdlib.h>
 #include <memory.h>
 

@@ -1,5 +1,5 @@
-#include "ram.h"
-#include "cpu.h"
+#include "machine/core/ram.h"
+#include "machine/core/cpu.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>

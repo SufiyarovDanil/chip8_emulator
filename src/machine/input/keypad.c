@@ -1,4 +1,4 @@
-#include "keypad.h"
+#include "machine/input/keypad.h"
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include <memory.h>

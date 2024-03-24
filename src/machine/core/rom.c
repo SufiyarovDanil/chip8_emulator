@@ -1,4 +1,4 @@
-#include "rom.h"
+#include "machine/core/rom.h"
 #include <stdlib.h>
 #include <stdio.h>
 

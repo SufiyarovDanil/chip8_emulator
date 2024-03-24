@@ -1,5 +1,5 @@
-#include "emulator.h"
-#include "core/cpu.h"
+#include "machine/emulator.h"
+#include "machine/core/cpu.h"
 #include <stdlib.h>
 
 
